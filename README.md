@@ -56,7 +56,7 @@ await cesdk.createFromImage('https://example.com/photo.jpg');
 await cesdk.loadFromArchiveURL('https://example.com/template.zip');
 
 // Create a blank canvas
-await cesdk.createDesignScene();
+await cesdk.actions.run('scene.create');
 
 // Load from a scene file
 await cesdk.loadFromURL('https://example.com/scene.json');
