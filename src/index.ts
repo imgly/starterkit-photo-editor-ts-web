@@ -16,7 +16,7 @@ import { initPhotoEditor } from './imgly';
 // ============================================================================
 
 const config = {
-  userId: 'starterkit-photo-editor-user',
+  userId: 'starterkit-photo-editor-user'
 
   // Local assets
   // baseURL: `/assets/`,
