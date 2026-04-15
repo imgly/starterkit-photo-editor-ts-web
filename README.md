@@ -3,8 +3,7 @@
 Professional photo editing for your web app — crop, filter, adjust, and remove backgrounds. Built with [CE.SDK](https://img.ly/creative-sdk) by [IMG.LY](https://img.ly), runs entirely in the browser with no server dependencies.
 
 <p>
-  <a href="https://img.ly/docs/cesdk/starterkits/photo-editor/">Documentation</a> |
-  <a href="https://img.ly/showcases/cesdk">Live Demo</a>
+  <a href="https://img.ly/docs/cesdk/js/starterkits/photo-editor-r6kq0u/">Documentation</a>
 </p>
 
 ![Photo Editor starter kit showing a professional photo editing interface](./hero.webp)

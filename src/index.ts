@@ -16,7 +16,7 @@ import { initPhotoEditor } from './imgly';
 // ============================================================================
 
 const config = {
-  userId: 'starterkit-photo-editor-user',
+  userId: 'starterkit-photo-editor-user'
 
   // Local assets
   // baseURL: `/assets/`,
@@ -32,6 +32,13 @@ CreativeEditorSDK.create('#cesdk_container', config)
     (window as any).cesdk = cesdk;
 
     await initPhotoEditor(cesdk);
+    // ============================================================================
+    // Scene Loading
+    // ============================================================================
+
+    await cesdk.loadFromArchiveURL(
+      'https://cdn.img.ly/packages/imgly/plugin-marketing-asset-source-web/1.0.0/assets/templates/16-9-fashion-ad.zip'
+    );
   })
   .catch((error) => {
     // eslint-disable-next-line no-console
