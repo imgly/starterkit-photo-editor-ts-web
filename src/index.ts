@@ -16,10 +16,12 @@ import { initPhotoEditor } from './imgly';
 // ============================================================================
 
 const config = {
-  userId: 'starterkit-photo-editor-user'
+  userId: 'starterkit-photo-editor-user',
 
-  // Local assets
-  // baseURL: `/assets/`,
+  // IMG.LY CDN (for quick testing only, NOT recommended for production)
+
+  // Local assets for development
+
 };
 
 // ============================================================================
