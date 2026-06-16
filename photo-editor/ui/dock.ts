@@ -167,7 +167,7 @@ export function setupDock(cesdk: CreativeEditorSDK): void {
       isSelected: () => {
         return ui.isPanelOpen('//ly.img.panel/assetLibrary', {
           payload: {
-            entries: ['ly.img.text'],
+            entries: ['ly.img.text.presets', 'ly.img.text'],
             title: 'libraries.ly.img.text.label'
           }
         });
@@ -175,7 +175,7 @@ export function setupDock(cesdk: CreativeEditorSDK): void {
       onClick: () => {
         const isOpen = ui.isPanelOpen('//ly.img.panel/assetLibrary', {
           payload: {
-            entries: ['ly.img.text'],
+            entries: ['ly.img.text.presets', 'ly.img.text'],
             title: 'libraries.ly.img.text.label'
           }
         });
@@ -185,7 +185,7 @@ export function setupDock(cesdk: CreativeEditorSDK): void {
           cesdk.ui.closePanel('*');
           cesdk.ui.openPanel('//ly.img.panel/assetLibrary', {
             payload: {
-              entries: ['ly.img.text'],
+              entries: ['ly.img.text.presets', 'ly.img.text'],
               title: 'libraries.ly.img.text.label'
             }
           });
