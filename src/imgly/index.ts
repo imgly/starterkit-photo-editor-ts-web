@@ -25,11 +25,11 @@ import {
 } from '@cesdk/cesdk-js/plugins';
 
 // Configuration and plugins
-import { PhotoEditorConfig } from '../../photo-editor/plugin';
+import { PhotoEditorConfig } from './config/plugin';
 import { setupBackgroundRemovalPlugin } from './plugins/background-removal';
 
 // Re-export for external use
-export { PhotoEditorConfig } from '../../photo-editor/plugin';
+export { PhotoEditorConfig } from './config/plugin';
 export { setupBackgroundRemovalPlugin } from './plugins/background-removal';
 
 /**
