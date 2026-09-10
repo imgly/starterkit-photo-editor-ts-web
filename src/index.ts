@@ -4,13 +4,12 @@
  * This file initializes the photo editor.
  * For customization options, see the `./imgly/` folder.
  *
- * @see https://img.ly/docs/cesdk/js/get-started/overview-e18f40/
+ * @see https://img.ly/docs/cesdk/js/getting-started/
  */
 
 import CreativeEditorSDK from '@cesdk/cesdk-js';
 
 import { initPhotoEditor } from './imgly';
-
 
 // ============================================================================
 // Configuration
@@ -39,7 +38,7 @@ CreativeEditorSDK.create('#cesdk_container', config)
     // Scene Loading
     // ============================================================================
 
-    await cesdk.load(
+    await cesdk.loadFromURL(
       'https://cdn.img.ly/packages/imgly/plugin-marketing-asset-source-web/1.0.0/assets/templates/16-9-fashion-ad/scene.scene'
     );
   })
