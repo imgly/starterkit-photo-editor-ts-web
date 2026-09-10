@@ -11,6 +11,7 @@ import CreativeEditorSDK from '@cesdk/cesdk-js';
 
 import { initPhotoEditor } from './imgly';
 
+
 // ============================================================================
 // Configuration
 // ============================================================================
