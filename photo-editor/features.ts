@@ -83,7 +83,6 @@ export function setupFeatures(cesdk: CreativeEditorSDK) {
     // 'ly.img.crop.rotation', /* Crop rotation controls */
     // 'ly.img.crop.flip', /* Crop flip controls */
     // 'ly.img.crop.fillMode', /* Crop fill mode controls */
-    // 'ly.img.crop.fillAlignment', /* Crop fill alignment controls */
     // 'ly.img.crop.scale', /* Crop scale controls */
     // 'ly.img.crop.position', /* Crop position controls */
     // 'ly.img.crop.panel.autoOpen', /* Auto-open crop panel on crop mode */
@@ -161,7 +160,6 @@ export function setupFeatures(cesdk: CreativeEditorSDK) {
     // 'ly.img.scene.layout.horizontal', /* Horizontal layout toggle */
     // 'ly.img.scene.layout.vertical', /* Vertical layout toggle */
     // 'ly.img.scene.layout.free', /* Free layout toggle */
-    // 'ly.img.scene.fontSizeUnit', /* Font size unit selector in page resize panel */
     // #endregion
 
     // ============================================================================
@@ -314,20 +312,6 @@ export function setupFeatures(cesdk: CreativeEditorSDK) {
       return !selectedBlocks.some(
         (id) => engine.block.getType(id) === '//ly.img.ubq/page'
       );
-    }
-  );
-
-  /**
-   * Line Width slider in the Shape options popover - Photo Editor only.
-   * Other editors expose line thickness exclusively through the Stroke section's
-   * Width input; the Photo Editor keeps the legacy Shape-options entry for
-   * discoverability of fresh line graphics.
-   */
-  cesdk.feature.set(
-    'ly.img.shape.options.lineWidth',
-    ({ engine }: { engine: CreativeEngine }) => {
-      const [selectedBlock] = engine.block.findAllSelected();
-      return selectedBlock != null && engine.block.isLineOrigin(selectedBlock);
     }
   );
 
