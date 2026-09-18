@@ -35,16 +35,16 @@ export function setupSettings(engine: CreativeEngine): void {
   // engine.editor.setSetting('controlGizmo/showCropScaleHandles', true);
 
   // Move handles - Center handles for moving blocks
-  // engine.editor.setSetting('controlGizmo/showMoveHandles', true);
+  // engine.editor.setSetting('controlGizmo/moveHandleVisibility', 'auto');
 
   // Resize handles - Edge handles for non-proportional resizing
-  // engine.editor.setSetting('controlGizmo/showResizeHandles', true);
+  // engine.editor.setSetting('controlGizmo/resizeHandlesVisibility', 'auto');
 
   // Scale handles - Corner handles for proportional scaling
-  // engine.editor.setSetting('controlGizmo/showScaleHandles', true);
+  // engine.editor.setSetting('controlGizmo/scaleHandlesVisibility', 'auto');
 
   // Rotate handles - Handles for rotating blocks
-  // engine.editor.setSetting('controlGizmo/showRotateHandles', true);
+  // engine.editor.setSetting('controlGizmo/rotateHandlesVisibility', 'auto');
 
   // Minimum size (in screen pixels) when scaling down with gizmos or touch
   // Prevents blocks from becoming too small to interact with
@@ -168,8 +168,19 @@ export function setupSettings(engine: CreativeEngine): void {
   // ============================================================================
 
   // #region Animation Settings
-  // Enable/disable block animations (in/out animations, loops)
-  // engine.editor.setSetting('blockAnimations/enabled', true);
+  // Disable block animations so revealed blocks render at their base transform.
+  engine.editor.setSetting('blockAnimations/enabled', false);
+  // #endregion
+
+  // ============================================================================
+  // PLAYBACK SETTINGS
+  // Present the scene statically regardless of playback time
+  // ============================================================================
+
+  // #region Playback Settings
+  // Keep every block visible regardless of the current playback time, so a former video scene is
+  // shown as a static design.
+  engine.editor.setSetting('playback/showAllBlocks', true);
   // #endregion
 
   // ============================================================================

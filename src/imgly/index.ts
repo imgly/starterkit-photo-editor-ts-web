@@ -4,7 +4,7 @@
  * This module provides the main entry point for initializing the photo editor.
  * Import and call `initPhotoEditor()` to configure a CE.SDK instance for photo editing.
  *
- * @see https://img.ly/docs/cesdk/js/getting-started/
+ * @see https://img.ly/docs/cesdk/js/get-started/overview-e18f40/
  */
 
 import type CreativeEditorSDK from '@cesdk/cesdk-js';
@@ -24,13 +24,13 @@ import {
   VectorShapeAssetSource
 } from '@cesdk/cesdk-js/plugins';
 
+import BackgroundRemovalPlugin from '@imgly/plugin-background-removal-web';
+
 // Configuration and plugins
-import { PhotoEditorConfig } from '../../photo-editor/plugin';
-import { setupBackgroundRemovalPlugin } from './plugins/background-removal';
+import { PhotoEditorConfig } from './config/plugin';
 
 // Re-export for external use
-export { PhotoEditorConfig } from '../../photo-editor/plugin';
-export { setupBackgroundRemovalPlugin } from './plugins/background-removal';
+export { PhotoEditorConfig } from './config/plugin';
 
 /**
  * Initialize the CE.SDK Photo Editor with a complete configuration.
@@ -62,30 +62,24 @@ export async function initPhotoEditor(cesdk: CreativeEditorSDK) {
   // cesdk.setLocale('en');
 
   // ============================================================================
-  // Background Removal Plugin
-  // ============================================================================
-
-  // Setup AI-powered background removal
-  // Requires: npm install @imgly/background-removal onnxruntime-web
-  setupBackgroundRemovalPlugin(cesdk);
-
-  // ============================================================================
   // Asset Source Plugins
   // ============================================================================
 
   // Asset source plugins provide built-in asset libraries
-  await cesdk.addPlugin(new BlurAssetSource());
-  await cesdk.addPlugin(new ImageColorsAssetSource());
-  await cesdk.addPlugin(new ColorPaletteAssetSource());
-  await cesdk.addPlugin(new CropPresetsAssetSource());
-  await cesdk.addPlugin(new EffectsAssetSource());
-  await cesdk.addPlugin(new FiltersAssetSource());
-  await cesdk.addPlugin(new PagePresetsAssetSource());
-  await cesdk.addPlugin(new StickerAssetSource());
-  await cesdk.addPlugin(new TextAssetSource());
-  await cesdk.addPlugin(new TextComponentAssetSource());
-  await cesdk.addPlugin(new TypefaceAssetSource());
-  await cesdk.addPlugin(new VectorShapeAssetSource());
+  await Promise.all([
+    cesdk.addPlugin(new BlurAssetSource()),
+    cesdk.addPlugin(new ImageColorsAssetSource()),
+    cesdk.addPlugin(new ColorPaletteAssetSource()),
+    cesdk.addPlugin(new CropPresetsAssetSource()),
+    cesdk.addPlugin(new EffectsAssetSource()),
+    cesdk.addPlugin(new FiltersAssetSource()),
+    cesdk.addPlugin(new PagePresetsAssetSource()),
+    cesdk.addPlugin(new StickerAssetSource()),
+    cesdk.addPlugin(new TextAssetSource()),
+    cesdk.addPlugin(new TextComponentAssetSource()),
+    cesdk.addPlugin(new TypefaceAssetSource()),
+    cesdk.addPlugin(new VectorShapeAssetSource())
+  ]);
 
   // ============================================================================
   // Localization
@@ -115,5 +109,23 @@ export async function initPhotoEditor(cesdk: CreativeEditorSDK) {
         });
       }
     }
+  );
+
+  // ============================================================================
+  // Background Removal Plugin
+  // ============================================================================
+
+  await cesdk.addPlugin(
+    BackgroundRemovalPlugin({
+      provider: {
+        type: '@imgly/background-removal'
+      }
+    })
+  );
+
+  // Add Background Removal to the dock, grouped with the other photo tools.
+  cesdk.ui.insertOrderComponent(
+    { in: 'ly.img.dock', after: { key: 'ly.img.effects' } },
+    '@imgly/plugin-background-removal-web.dock'
   );
 }
