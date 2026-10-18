@@ -10,7 +10,6 @@
 import CreativeEditorSDK from '@cesdk/cesdk-js';
 
 import { initPhotoEditor } from './imgly';
-import { DEMO_ASSETS_BASE_URL } from './imgly/demo-assets';
 
 
 // ============================================================================
@@ -32,6 +31,8 @@ const config = {
 
 CreativeEditorSDK.create('#cesdk_container', config)
   .then(async (cesdk) => {
+    // Debug access (remove in production)
+    (window as any).cesdk = cesdk;
 
     await initPhotoEditor(cesdk);
     // ============================================================================
@@ -39,7 +40,7 @@ CreativeEditorSDK.create('#cesdk_container', config)
     // ============================================================================
 
     await cesdk.load(
-      `${DEMO_ASSETS_BASE_URL}/assets/16-9-fashion-ad/scene.scene`
+      'https://cdn.img.ly/packages/imgly/plugin-marketing-asset-source-web/1.0.0/assets/templates/16-9-fashion-ad/scene.scene'
     );
   })
   .catch((error) => {

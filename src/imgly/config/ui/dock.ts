@@ -15,7 +15,6 @@
  * - `onClick` - Custom click handler (overrides default behavior)
  * - `isSelected` - Boolean or function to control selected state
  * - `isDisabled` - Boolean or function to control disabled state
- * - `tooltip` - Text or translation key, or a function returning one, for the button tooltip
  * - `size` - Button size: `'normal'` | `'large'`
  * - `variant` - Button variant: `'regular'` | `'plain'`
  * - `color` - Button color: `'accent'` | `'danger'`
@@ -52,24 +51,6 @@ export function setupDock(cesdk: CreativeEditorSDK): void {
   // Configure photo editing tools and asset libraries
   // ============================================================================
 
-  // Adjust, Filter and Effects edit the page's image, so a page with a color
-  // or gradient fill disables them.
-  const pageHasNoImage = () => {
-    const page = engine.scene.getCurrentPage();
-    if (page == null || !engine.block.supportsFill(page)) return true;
-    const fill = engine.block.getFill(page);
-    if (!engine.block.isValid(fill)) return true;
-    const fillType = engine.block.getType(fill);
-    return (
-      fillType !== '//ly.img.ubq/fill/image' &&
-      fillType !== '//ly.img.ubq/fill/video'
-    );
-  };
-  const isImageToolDisabled = () =>
-    pageHasNoImage() || ui.isPanelOpen('//ly.img.panel/assetLibrary.replace');
-  const requiresImageTooltip = () =>
-    pageHasNoImage() ? 'photoEditor.dock.requiresImage' : undefined;
-
   // #region Dock Order
   ui.setComponentOrder({ in: 'ly.img.dock' }, [
     'ly.img.spacer',
@@ -81,7 +62,7 @@ export function setupDock(cesdk: CreativeEditorSDK): void {
       id: 'ly.img.assetLibrary.dock',
       key: 'ly.img.crop',
       icon: '@imgly/Crop',
-      label: 'ly.img.crop.dock.label',
+      label: 'Crop',
       entries: [],
       isSelected: () => ui.isPanelOpen('//ly.img.panel/inspector/crop'),
       onClick: () => {
@@ -101,10 +82,8 @@ export function setupDock(cesdk: CreativeEditorSDK): void {
       id: 'ly.img.assetLibrary.dock',
       key: 'ly.img.adjustment',
       icon: '@imgly/Adjustments',
-      label: 'ly.img.adjustment.dock.label',
+      label: 'Adjust',
       entries: [],
-      isDisabled: isImageToolDisabled,
-      tooltip: requiresImageTooltip,
       isSelected: () => ui.isPanelOpen('//ly.img.panel/inspector/adjustments'),
       onClick: () => {
         const panelId = '//ly.img.panel/inspector/adjustments';
@@ -126,10 +105,8 @@ export function setupDock(cesdk: CreativeEditorSDK): void {
       id: 'ly.img.assetLibrary.dock',
       key: 'ly.img.filter',
       icon: '@imgly/Filter',
-      label: 'ly.img.filter.dock.label',
+      label: 'Filter',
       entries: [],
-      isDisabled: isImageToolDisabled,
-      tooltip: requiresImageTooltip,
       isSelected: () => ui.isPanelOpen('//ly.img.panel/inspector/filters'),
       onClick: () => {
         const panelId = '//ly.img.panel/inspector/filters';
@@ -151,10 +128,8 @@ export function setupDock(cesdk: CreativeEditorSDK): void {
       id: 'ly.img.assetLibrary.dock',
       key: 'ly.img.effects',
       icon: '@imgly/Effects',
-      label: 'ly.img.effects.dock.label',
+      label: 'Effects',
       entries: [],
-      isDisabled: isImageToolDisabled,
-      tooltip: requiresImageTooltip,
       isSelected: () => ui.isPanelOpen('//ly.img.panel/inspector/effects'),
       onClick: () => {
         const panelId = '//ly.img.panel/inspector/effects';
